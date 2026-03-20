@@ -58,11 +58,22 @@ Add the plugin to your `app.json`:
 {
   "expo": {
     "plugins": [
+      ["@nativecraft/expo-tiktok-business"]
+    ]
+  }
+}
+```
+
+With custom ATT description:
+
+```json
+{
+  "expo": {
+    "plugins": [
       [
         "@nativecraft/expo-tiktok-business",
         {
-          "trackingDescription": "We use this to measure ad performance and show you relevant ads.",
-          "addProguardRules": true
+          "trackingDescription": "Your custom tracking permission message."
         }
       ]
     ]
