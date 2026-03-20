@@ -1,4 +1,4 @@
-package com.nativecraft.tiktokbusiness
+package com.craftstudiodev.tiktokbusiness
 
 import com.facebook.react.bridge.*
 import com.tiktok.appevents.TikTokBusinessSdk

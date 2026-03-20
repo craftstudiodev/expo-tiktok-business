@@ -1,4 +1,4 @@
-# @nativecraft/expo-tiktok-business
+# @craftstudiodev/expo-tiktok-business
 
 TikTok Business SDK bridge for React Native — built as a **Turbo Module** for the New Architecture, with an **Expo config plugin** for zero-config setup.
 
@@ -21,10 +21,10 @@ The official TikTok Business SDK only ships native iOS/Android libraries. This p
 
 ```bash
 # npm
-npm install @nativecraft/expo-tiktok-business
+npm install @craftstudiodev/expo-tiktok-business
 
 # yarn
-yarn add @nativecraft/expo-tiktok-business
+yarn add @craftstudiodev/expo-tiktok-business
 ```
 
 ### Bare React Native (CLI)
@@ -58,7 +58,7 @@ Add the plugin to your `app.json`:
 {
   "expo": {
     "plugins": [
-      ["@nativecraft/expo-tiktok-business"]
+      ["@craftstudiodev/expo-tiktok-business"]
     ]
   }
 }
@@ -71,7 +71,7 @@ With custom ATT description:
   "expo": {
     "plugins": [
       [
-        "@nativecraft/expo-tiktok-business",
+        "@craftstudiodev/expo-tiktok-business",
         {
           "trackingDescription": "Your custom tracking permission message."
         }
@@ -92,7 +92,7 @@ Then run `npx expo prebuild` to apply the native changes.
 Call this once at app startup (e.g., in your root component or service initializer):
 
 ```typescript
-import { TikTokBusiness } from '@nativecraft/expo-tiktok-business';
+import { TikTokBusiness } from '@craftstudiodev/expo-tiktok-business';
 
 const tiktok = TikTokBusiness.getInstance();
 
@@ -109,7 +109,7 @@ await tiktok.initialize({
 Use built-in event names for standard events, or pass custom strings:
 
 ```typescript
-import { TikTokBusiness, TikTokEventName } from '@nativecraft/expo-tiktok-business';
+import { TikTokBusiness, TikTokEventName } from '@craftstudiodev/expo-tiktok-business';
 
 const tiktok = TikTokBusiness.getInstance();
 
@@ -190,7 +190,7 @@ tiktok.setTrackingEnabled(userGrantedTracking); // true or false
 
 ```typescript
 import { useEffect } from 'react';
-import { TikTokBusiness, TikTokEventName } from '@nativecraft/expo-tiktok-business';
+import { TikTokBusiness, TikTokEventName } from '@craftstudiodev/expo-tiktok-business';
 
 export default function App() {
   useEffect(() => {

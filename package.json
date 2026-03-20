@@ -1,5 +1,5 @@
 {
-  "name": "@nativecraft/expo-tiktok-business",
+  "name": "@craftstudiodev/expo-tiktok-business",
   "version": "1.0.0",
   "description": "TikTok Business SDK for React Native — Turbo Module (New Architecture) + Expo support",
   "main": "lib/index.js",
@@ -31,15 +31,15 @@
     "expo",
     "expo-plugin"
   ],
-  "author": "NativeCraft",
+  "author": "Craft Studio",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/nativecraft/expo-tiktok-business.git"
+    "url": "https://github.com/craftstudiodev/expo-tiktok-business.git"
   },
-  "homepage": "https://github.com/nativecraft/expo-tiktok-business#readme",
+  "homepage": "https://github.com/craftstudiodev/expo-tiktok-business#readme",
   "bugs": {
-    "url": "https://github.com/nativecraft/expo-tiktok-business/issues"
+    "url": "https://github.com/craftstudiodev/expo-tiktok-business/issues"
   },
   "peerDependencies": {
     "react": ">=18.0.0",
@@ -53,7 +53,7 @@
     "type": "modules",
     "jsSrcsDir": "src",
     "android": {
-      "javaPackageName": "com.nativecraft.tiktokbusiness"
+      "javaPackageName": "com.craftstudiodev.tiktokbusiness"
     }
   }
 }
