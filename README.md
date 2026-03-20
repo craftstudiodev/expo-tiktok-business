@@ -175,22 +175,13 @@ tiktok.identify({
 tiktok.logout();
 ```
 
-### Request ATT (iOS)
-
-Request App Tracking Transparency authorization. Returns `true` if authorized, `false` otherwise. On Android, always returns `true`.
-
-```typescript
-const authorized = await tiktok.requestTrackingAuthorization();
-if (authorized) {
-  // User allowed tracking
-}
-```
-
 ### Enable/disable tracking
 
+ATT (App Tracking Transparency) should be handled at the **app level** — not inside this SDK. Use `expo-tracking-transparency` or your own ATT flow, then pass the result:
+
 ```typescript
-tiktok.setTrackingEnabled(false); // opt out
-tiktok.setTrackingEnabled(true);  // opt back in
+// After your ATT prompt resolves:
+tiktok.setTrackingEnabled(userGrantedTracking); // true or false
 ```
 
 ---
@@ -205,10 +196,7 @@ export default function App() {
   useEffect(() => {
     const init = async () => {
       const tiktok = TikTokBusiness.getInstance();
-      
-      // Request tracking (iOS ATT)
-      await tiktok.requestTrackingAuthorization();
-      
+
       // Initialize SDK
       await tiktok.initialize({
         appId: 'com.yourcompany.app',

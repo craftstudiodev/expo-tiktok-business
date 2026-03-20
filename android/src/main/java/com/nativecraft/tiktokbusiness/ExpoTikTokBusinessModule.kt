@@ -76,9 +76,4 @@ class ExpoTikTokBusinessModule(reactContext: ReactApplicationContext) :
         TikTokBusinessSdk.setTrackingEnabled(enabled)
     }
 
-    @ReactMethod
-    fun requestTrackingAuthorization(promise: Promise) {
-        // ATT is iOS only, Android always returns true
-        promise.resolve(true)
-    }
 }

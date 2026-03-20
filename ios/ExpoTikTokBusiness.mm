@@ -23,9 +23,6 @@ RCT_EXTERN_METHOD(logout)
 
 RCT_EXTERN_METHOD(setTrackingEnabled:(BOOL)enabled)
 
-RCT_EXTERN_METHOD(requestTrackingAuthorization:(RCTPromiseResolveBlock)resolve
-                  reject:(RCTPromiseRejectBlock)reject)
-
 + (BOOL)requiresMainQueueSetup {
     return NO;
 }

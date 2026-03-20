@@ -7,7 +7,6 @@ export interface Spec extends TurboModule {
   identify(externalId: string, externalUserName: string, phoneNumber: string, email: string): void;
   logout(): void;
   setTrackingEnabled(enabled: boolean): void;
-  requestTrackingAuthorization(): Promise<boolean>;
 }
 
 export default TurboModuleRegistry.getEnforcing<Spec>('ExpoTikTokBusiness');

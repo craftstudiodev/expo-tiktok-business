@@ -1,6 +1,5 @@
 import Foundation
 import TikTokBusinessSDK
-import AppTrackingTransparency
 
 @objc(ExpoTikTokBusiness)
 class ExpoTikTokBusiness: NSObject {
@@ -70,15 +69,4 @@ class ExpoTikTokBusiness: NSObject {
         TikTokBusiness.setTrackingEnabled(enabled)
     }
     
-    @objc
-    func requestTrackingAuthorization(_ resolve: @escaping RCTPromiseResolveBlock,
-                                       reject: @escaping RCTPromiseRejectBlock) {
-        if #available(iOS 14, *) {
-            ATTrackingManager.requestTrackingAuthorization { status in
-                resolve(status == .authorized)
-            }
-        } else {
-            resolve(true)
-        }
-    }
 }

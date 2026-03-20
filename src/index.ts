@@ -69,10 +69,6 @@ class TikTokBusiness {
     NativeExpoTikTokBusiness.setTrackingEnabled(enabled);
   }
 
-  async requestTrackingAuthorization(): Promise<boolean> {
-    return NativeExpoTikTokBusiness.requestTrackingAuthorization();
-  }
-
   isInitialized(): boolean {
     return this.initialized;
   }
