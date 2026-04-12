@@ -28,12 +28,6 @@ final class RNTikTokBusiness: NSObject {
         config?.enableDebugMode()
       }
 
-      if appIds.count > 1 {
-        for id in appIds.dropFirst() {
-          config?.addTikTokAppId(id)
-        }
-      }
-
       TikTokBusiness.initializeSdk(config) { success, error in
         if success {
           resolve("TikTok SDK initialized successfully")
