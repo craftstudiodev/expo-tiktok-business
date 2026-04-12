@@ -22,8 +22,7 @@ final class RNTikTokBusiness: NSObject {
     reject: @escaping RCTPromiseRejectBlock
   ) {
     DispatchQueue.main.async {
-      let config = TikTokConfig(appId: appId, tiktokAppId: tiktokAppId)
-      config?.setAccessToken(accessToken)
+      let config = TikTokConfig.config(withAccessToken: accessToken, appId: appId, tiktokAppId: tiktokAppId)
 
       if debug {
         config?.enableDebugMode()
@@ -104,12 +103,14 @@ final class RNTikTokBusiness: NSObject {
       return
     }
 
-    let event = TikTokBaseEvent(eventName: eventName)
+    let event: TikTokBaseEvent
     if !eventId.isEmpty {
-      event.setEventId(eventId)
+      event = TikTokBaseEvent(eventName: eventName, eventId: eventId)
+    } else {
+      event = TikTokBaseEvent(eventName: eventName)
     }
     JSONHelper.addProperties(props, to: event)
-    TikTokBusiness.trackEvent(event)
+    TikTokBusiness.trackTTEvent(event)
     resolve("Event tracked: \(eventName)")
   }
 
@@ -134,7 +135,7 @@ final class RNTikTokBusiness: NSObject {
 
     ContentEventFactory.applyProperties(props, to: event)
     ContentEventFactory.applyContents(props, to: event)
-    TikTokBusiness.trackEvent(event)
+    TikTokBusiness.trackTTEvent(event)
     resolve("Content event tracked: \(eventType)")
   }
 
@@ -154,7 +155,7 @@ final class RNTikTokBusiness: NSObject {
 
     let event = TikTokBaseEvent(eventName: eventName)
     JSONHelper.addProperties(props, to: event)
-    TikTokBusiness.trackEvent(event)
+    TikTokBusiness.trackTTEvent(event)
     resolve("Custom event tracked: \(eventName)")
   }
 
@@ -172,12 +173,8 @@ final class RNTikTokBusiness: NSObject {
       return
     }
 
-    let event = TikTokAdRevenueEvent()
-    if !eventId.isEmpty {
-      event.setEventId(eventId)
-    }
-    JSONHelper.addProperties(props, to: event)
-    TikTokBusiness.trackEvent(event)
+    let event = TikTokAdRevenueEvent(adRevenue: props, eventId: eventId)
+    TikTokBusiness.trackTTEvent(event)
     resolve("Ad revenue event tracked")
   }
 }
@@ -204,7 +201,7 @@ private enum JSONHelper {
 // MARK: - Content Event Factory
 
 private enum ContentEventFactory {
-  static func create(eventType: String) -> TikTokBaseEvent? {
+  static func create(eventType: String) -> TikTokContentsEvent? {
     switch eventType {
     case "AddToCart":
       return TikTokAddToCartEvent()
@@ -221,30 +218,28 @@ private enum ContentEventFactory {
     }
   }
 
-  static func applyProperties(_ properties: [String: Any], to event: TikTokBaseEvent) {
+  static func applyProperties(_ properties: [String: Any], to event: TikTokContentsEvent) {
     if let contentType = properties["content_type"] as? String {
-      event.addProperty(withKey: "content_type", value: contentType)
+      event.setContentType(contentType)
     }
     if let contentId = properties["content_id"] as? String {
-      event.addProperty(withKey: "content_id", value: contentId)
+      event.setContentId(contentId)
     }
     if let description = properties["description"] as? String {
-      event.addProperty(withKey: "description", value: description)
+      event.setDescription(description)
     }
     if let currency = properties["currency"] as? String {
-      event.addProperty(withKey: "currency", value: currency)
+      event.setCurrency(currency)
     }
     if let value = properties["value"] as? NSNumber {
-      event.addProperty(withKey: "value", value: value)
-    }
-    if let orderId = properties["order_id"] as? String {
-      event.addProperty(withKey: "order_id", value: orderId)
+      event.setValue(value.stringValue)
     }
   }
 
-  static func applyContents(_ properties: [String: Any], to event: TikTokBaseEvent) {
+  static func applyContents(_ properties: [String: Any], to event: TikTokContentsEvent) {
     guard let contentsArray = properties["contents"] as? [[String: Any]] else { return }
 
+    var contentParamsArray: [TikTokContentParams] = []
     for item in contentsArray {
       let contentParams = TikTokContentParams()
       if let contentId = item["content_id"] as? String {
@@ -263,9 +258,10 @@ private enum ContentEventFactory {
         contentParams.price = price
       }
       if let quantity = item["quantity"] as? NSNumber {
-        contentParams.quantity = quantity
+        contentParams.quantity = quantity.intValue
       }
-      event.addContents(contentParams)
+      contentParamsArray.append(contentParams)
     }
+    event.setContents(contentParamsArray)
   }
 }
