@@ -28,8 +28,6 @@ final class RNTikTokBusiness: NSObject {
         config?.enableDebugMode()
       }
 
-      // Support multiple TikTok App IDs (comma-separated)
-      let appIds = tiktokAppId.split(separator: ",").map { String($0).trimmingCharacters(in: .whitespaces) }
       if appIds.count > 1 {
         for id in appIds.dropFirst() {
           config?.addTikTokAppId(id)
