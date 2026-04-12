@@ -227,7 +227,7 @@ private enum ContentEventFactory {
       event.setDescription(description)
     }
     if let currency = properties["currency"] as? String {
-      event.setCurrency(currency)
+      event.setCurrency(TTCurrency(rawValue: currency))
     }
     if let value = properties["value"] as? NSNumber {
       event.setValue(value.stringValue)
