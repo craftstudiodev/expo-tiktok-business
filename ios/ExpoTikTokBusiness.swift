@@ -13,7 +13,7 @@ class ExpoTikTokBusiness: NSObject {
                      resolve: @escaping RCTPromiseResolveBlock,
                      reject: @escaping RCTPromiseRejectBlock) {
         DispatchQueue.main.async {
-            let config = TikTokConfig.config(withAccessToken: accessToken, appId: appId, tiktokAppId: tiktokAppId)
+            let config = TikTokConfig(accessToken: accessToken, appId: appId, tiktokAppId: tiktokAppId)
 
             if debug {
                 config?.setLogLevel(.debug)
