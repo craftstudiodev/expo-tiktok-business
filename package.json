@@ -1,6 +1,6 @@
 {
   "name": "@craftstudiodev/expo-tiktok-business",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "TikTok Business SDK for React Native — Turbo Module (New Architecture) + Expo support",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
