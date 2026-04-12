@@ -16,7 +16,7 @@ class ExpoTikTokBusiness: NSObject {
             let config = TikTokConfig(accessToken: accessToken, appId: appId, tiktokAppId: tiktokAppId)
 
             if debug {
-                config?.setLogLevel(.debug)
+                config?.enableDebugMode()
             }
 
             if let config = config {
